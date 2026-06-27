@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 import { format } from "date-fns";
-import { Download } from "lucide-react";
+import { Download, Receipt } from "lucide-react";
 import StatusBadge from "@/components/admin/StatusBadge";
 import type { InvoiceWithInquiryCustomer } from "@/types";
 import Link from "next/link";
@@ -29,15 +29,17 @@ export default async function InvoicesPage() {
     )
     .order("created_at", { ascending: false });
 
-  // Single cast at the data boundary — the select string above exactly
+  // Single cast at the data boundary - the select string above exactly
   // matches InvoiceWithInquiryCustomer.
   const rows = (data ?? []) as unknown as InvoiceWithInquiryCustomer[];
 
   return (
-    <div className="p-6 lg:p-8">
+    <div className="p-5 sm:p-6 lg:p-8">
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-[#114A2C] font-[Poppins]">Invoices</h1>
-        <p className="text-gray-500 text-sm mt-1">{rows.length} invoices issued</p>
+        <p className="text-gray-500 text-sm mt-1">
+          Invoices are uploaded after quote confirmation. Automatic invoice generation is not implemented yet.
+        </p>
       </div>
 
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
@@ -59,7 +61,9 @@ export default async function InvoicesPage() {
               {rows.length === 0 ? (
                 <tr>
                   <td colSpan={8} className="px-5 py-12 text-center text-gray-400 text-sm">
-                    No invoices yet.
+                    <Receipt className="w-9 h-9 text-gray-300 mx-auto mb-3" />
+                    <div className="font-semibold text-[#114A2C]">No invoices yet.</div>
+                    <p className="text-gray-400 mt-1">Feature not implemented yet: automatic invoice generation.</p>
                   </td>
                 </tr>
               ) : (
@@ -87,19 +91,19 @@ export default async function InvoicesPage() {
                       </td>
 
                       <td className="px-5 py-4 text-sm font-semibold text-[#2D3748]">
-                        {inq?.customers?.company_name ?? "—"}
+                        {inq?.customers?.company_name ?? "-"}
                       </td>
 
                       <td className="px-5 py-4 text-sm font-semibold text-[#114A2C]">
                         {inv.amount != null
                           ? `${inv.currency} ${inv.amount.toLocaleString()}`
-                          : "—"}
+                          : "-"}
                       </td>
 
                       <td className="px-5 py-4 text-xs text-gray-500">
                         {inv.due_date
                           ? format(new Date(inv.due_date), "dd MMM yyyy")
-                          : "—"}
+                          : "-"}
                       </td>
 
                       <td className="px-5 py-4">
@@ -141,4 +145,3 @@ export default async function InvoicesPage() {
     </div>
   );
 }
-

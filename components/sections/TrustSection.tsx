@@ -36,7 +36,7 @@ const cardVariants = {
 export default function TrustSection() {
   return (
     <section id="trust" className="py-24 bg-[#F8FAF8]">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-6 xl:px-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -72,7 +72,7 @@ export default function TrustSection() {
                 key={feature.title}
                 variants={cardVariants}
                 whileHover={{ y: -6, boxShadow: "0 20px 60px rgba(29,111,66,0.12)" }}
-                className="bg-white rounded-2xl p-8 border border-gray-100 transition-all duration-300 group cursor-default"
+                className="h-full bg-white rounded-2xl p-8 border border-gray-100 transition-all duration-300 group cursor-default"
               >
                 <div className="w-14 h-14 rounded-xl bg-[#E8F5E9] flex items-center justify-center mb-6 group-hover:bg-[#1D6F42] transition-colors duration-300">
                   <Icon className="w-7 h-7 text-[#1D6F42] group-hover:text-white transition-colors duration-300" />

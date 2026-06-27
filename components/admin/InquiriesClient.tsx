@@ -3,7 +3,7 @@
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useCallback, useTransition } from "react";
 import { format } from "date-fns";
-import { Search, ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
+import { Search, ChevronLeft, ChevronRight, ArrowUpRight, Inbox } from "lucide-react";
 import StatusBadge from "./StatusBadge";
 import { INQUIRY_STATUSES, STATUS_CONFIG } from "@/lib/utils";
 import type { InquiryStatus, InquiryWithCustomer } from "@/types";
@@ -45,7 +45,7 @@ export default function InquiriesClient({
           <input
             type="text"
             defaultValue={currentSearch}
-            placeholder="Search company, country, product, ID…"
+            placeholder="Search company, country, product, ID..."
             onChange={(e) => updateParam("search", e.target.value)}
             className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-[#1D6F42]/30 focus:border-[#1D6F42]"
           />
@@ -101,7 +101,9 @@ export default function InquiriesClient({
               {inquiries.length === 0 ? (
                 <tr>
                   <td colSpan={8} className="px-5 py-12 text-center text-gray-400 text-sm">
-                    No inquiries found.
+                    <Inbox className="w-9 h-9 text-gray-300 mx-auto mb-3" />
+                    <div className="font-semibold text-[#114A2C]">No inquiries found.</div>
+                    <p className="text-gray-400 mt-1">Submit an inquiry from the public website.</p>
                   </td>
                 </tr>
               ) : (
@@ -114,7 +116,7 @@ export default function InquiriesClient({
                     </td>
                     <td className="px-5 py-4">
                       <div className="font-semibold text-[#2D3748] text-sm">{inq.company_name}</div>
-                      <div className="text-xs text-gray-400">{inq.full_name} · {inq.email}</div>
+                      <div className="text-xs text-gray-400">{inq.full_name} | {inq.email}</div>
                     </td>
                     <td className="px-5 py-4 text-gray-600 text-sm whitespace-nowrap">{inq.country}</td>
                     <td className="px-5 py-4 text-gray-600 text-sm">{inq.product}</td>

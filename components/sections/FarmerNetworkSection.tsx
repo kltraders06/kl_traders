@@ -15,16 +15,16 @@ export default function FarmerNetworkSection() {
   return (
     <section className="relative py-24 overflow-hidden">
       {/* Background */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1592547253753-24c0012d3765?w=1920&q=85')",
-        }}
+      <Image
+        src="/images/hero/hero-curry-leaf-farm.jpg"
+        alt="KL TRADERS curry leaf farm network"
+        fill
+        className="object-cover"
+        sizes="100vw"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-[#114A2C]/95 via-[#114A2C]/85 to-[#1D6F42]/70" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-5 sm:px-6 xl:px-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Content */}
           <motion.div

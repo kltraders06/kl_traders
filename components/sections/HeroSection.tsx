@@ -17,8 +17,8 @@ export default function HeroSection() {
       className="relative flex min-h-screen items-center justify-center overflow-hidden"
     >
       <Image
-        src="https://images.unsplash.com/photo-1560493676-04071c5f467b?w=1920&q=90"
-        alt="Green agricultural field"
+        src="/images/hero/hero-coriander-field.jpg"
+        alt="KL TRADERS coriander field in Tamil Nadu"
         fill
         priority
         className="object-cover"
@@ -34,7 +34,7 @@ export default function HeroSection() {
         }}
       />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-32 pt-40">
+      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-5 sm:px-6 xl:px-10 py-32 pt-40">
         <div className="max-w-4xl mx-auto lg:mx-0 text-center lg:text-left">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

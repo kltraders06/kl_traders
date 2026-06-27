@@ -122,7 +122,7 @@ export default function InquiryDetailClient({ inquiry, quotes, invoices }: Props
             rows={4}
             value={adminNotes}
             onChange={(e) => setAdminNotes(e.target.value)}
-            placeholder="Add internal notes, follow-up reminders, negotiation details…"
+            placeholder="Add internal notes, follow-up reminders, negotiation details..."
             className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#2D3748] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1D6F42]/30 focus:border-[#1D6F42] resize-none"
           />
         </div>
@@ -139,7 +139,7 @@ export default function InquiryDetailClient({ inquiry, quotes, invoices }: Props
           ) : (
             <Save className="w-4 h-4" />
           )}
-          {saving ? "Saving…" : saved ? "Saved!" : "Save Changes"}
+          {saving ? "Saving..." : saved ? "Saved!" : "Save Changes"}
         </button>
       </div>
 
@@ -240,7 +240,7 @@ export default function InquiryDetailClient({ inquiry, quotes, invoices }: Props
             ) : (
               <FileUp className="w-4 h-4" />
             )}
-            {uploading ? "Uploading…" : `Upload ${uploadType.charAt(0).toUpperCase() + uploadType.slice(1)}`}
+            {uploading ? "Uploading..." : `Upload ${uploadType.charAt(0).toUpperCase() + uploadType.slice(1)}`}
           </button>
         </div>
       </div>
@@ -261,8 +261,8 @@ export default function InquiryDetailClient({ inquiry, quotes, invoices }: Props
                   <code className="text-xs font-mono bg-purple-50 text-purple-700 px-2 py-0.5 rounded">{q.quote_number}</code>
                   <div className="text-xs text-gray-400 mt-1">
                     {format(new Date(q.created_at), "dd MMM yyyy")}
-                    {q.total_amount != null && ` · ${q.currency} ${q.total_amount.toLocaleString()}`}
-                    {q.notes && ` · ${q.notes}`}
+                    {q.total_amount != null && ` | ${q.currency} ${q.total_amount.toLocaleString()}`}
+                    {q.notes && ` | ${q.notes}`}
                   </div>
                 </div>
                 {q.file_path && (
@@ -297,8 +297,8 @@ export default function InquiryDetailClient({ inquiry, quotes, invoices }: Props
                   <code className="text-xs font-mono bg-amber-50 text-amber-700 px-2 py-0.5 rounded">{inv.invoice_number}</code>
                   <div className="text-xs text-gray-400 mt-1">
                     {format(new Date(inv.created_at), "dd MMM yyyy")}
-                    {inv.amount != null && ` · ${inv.currency} ${inv.amount.toLocaleString()}`}
-                    {inv.due_date && ` · Due: ${format(new Date(inv.due_date), "dd MMM yyyy")}`}
+                    {inv.amount != null && ` | ${inv.currency} ${inv.amount.toLocaleString()}`}
+                    {inv.due_date && ` | Due: ${format(new Date(inv.due_date), "dd MMM yyyy")}`}
                   </div>
                 </div>
                 {inv.file_path && (

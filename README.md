@@ -2,6 +2,10 @@
 
 Next.js 16 website for KL TRADERS with Supabase-backed inquiries, admin dashboard, quote uploads, invoice uploads, and Netlify deployment configuration.
 
+Official contact email: `kltraders06@gmail.com`
+
+Customer management is a future enhancement. The current admin panel focuses on inquiries, quote PDF uploads, and invoice PDF uploads.
+
 ## Stack
 
 - Next.js 16.2.9

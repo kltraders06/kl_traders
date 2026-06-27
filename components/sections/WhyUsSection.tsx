@@ -28,7 +28,7 @@ const iconMap: Record<string, LucideIcon> = {
 export default function WhyUsSection() {
   return (
     <section className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-6 xl:px-10">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -59,7 +59,7 @@ export default function WhyUsSection() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.07 }}
                 whileHover={{ y: -5 }}
-                className="group bg-[#F8FAF8] hover:bg-[#1D6F42] rounded-2xl p-6 transition-all duration-400 cursor-default"
+                className="group h-full bg-[#F8FAF8] hover:bg-[#1D6F42] rounded-2xl p-6 transition-all duration-300 cursor-default"
               >
                 <Icon className="w-8 h-8 text-[#1D6F42] group-hover:text-white mb-4 transition-colors duration-300" />
                 <h3 className="font-bold text-[#114A2C] group-hover:text-white mb-2 text-sm font-[Poppins] leading-snug transition-colors duration-300">

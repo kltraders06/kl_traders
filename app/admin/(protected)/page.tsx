@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 import { STATUS_CONFIG, INQUIRY_STATUSES } from "@/lib/utils";
-import { FileText, Users, FileCheck, Receipt, TrendingUp } from "lucide-react";
+import { FileText, Users, FileCheck, Receipt, TrendingUp, Inbox } from "lucide-react";
 import { format } from "date-fns";
 import StatusBadge from "@/components/admin/StatusBadge";
 import type { InquiryWithCustomer } from "@/types";
@@ -31,7 +31,6 @@ async function getDashboardData() {
     supabaseAdmin.from("inquiries").select("status"),
   ]);
 
-  // Count by status
   const statusCounts: Record<string, number> = {};
   for (const row of byStatus ?? []) {
     statusCounts[row.status] = (statusCounts[row.status] ?? 0) + 1;
@@ -42,7 +41,6 @@ async function getDashboardData() {
     totalCustomers: totalCustomers ?? 0,
     totalQuotes: totalQuotes ?? 0,
     totalInvoices: totalInvoices ?? 0,
-    // Single cast at the boundary — the view columns match InquiryWithCustomer.
     recentInquiries: (recentInquiries ?? []) as unknown as InquiryWithCustomer[],
     statusCounts,
   };
@@ -59,30 +57,40 @@ export default async function AdminDashboard() {
   } = await getDashboardData();
 
   const statCards = [
-    { label: "Total Inquiries", value: totalInquiries, icon: FileText, color: "bg-blue-500"   },
-    { label: "Customers",       value: totalCustomers, icon: Users,     color: "bg-purple-500" },
-    { label: "Quotes Issued",   value: totalQuotes,    icon: FileCheck, color: "bg-[#1D6F42]"  },
-    { label: "Invoices",        value: totalInvoices,  icon: Receipt,   color: "bg-amber-500"  },
+    { label: "Total Inquiries", value: totalInquiries, icon: FileText, color: "bg-blue-500", hint: "Buyer requests" },
+    { label: "Customers", value: totalCustomers, icon: Users, color: "bg-purple-500", hint: "Companies captured" },
+    { label: "Quotes Issued", value: totalQuotes, icon: FileCheck, color: "bg-[#1D6F42]", hint: "Uploaded PDFs" },
+    { label: "Invoices", value: totalInvoices, icon: Receipt, color: "bg-amber-500", hint: "Uploaded PDFs" },
   ];
 
   return (
-    <div className="p-6 lg:p-8">
-      {/* Page header */}
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-[#114A2C] font-[Poppins]">Dashboard</h1>
-        <p className="text-gray-500 text-sm mt-1">
-          Overview of all inquiries, customers, and documents.
-        </p>
+    <div className="p-5 sm:p-6 lg:p-8">
+      <div className="mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-[#114A2C] font-[Poppins]">Dashboard</h1>
+          <p className="text-gray-500 text-sm mt-1">
+            Overview of inquiries, customers, quotes, and invoice uploads.
+          </p>
+        </div>
+        <Link
+          href="/"
+          target="_blank"
+          className="inline-flex w-fit rounded-xl bg-[#1D6F42] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#114A2C]"
+        >
+          View Website
+        </Link>
       </div>
 
-      {/* Stat cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
         {statCards.map((c) => {
           const Icon = c.icon;
           return (
             <div key={c.label} className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
-              <div className={`w-10 h-10 ${c.color} rounded-xl flex items-center justify-center mb-3`}>
-                <Icon className="w-5 h-5 text-white" />
+              <div className="flex items-start justify-between gap-4">
+                <div className={`w-10 h-10 ${c.color} rounded-xl flex items-center justify-center mb-3`}>
+                  <Icon className="w-5 h-5 text-white" />
+                </div>
+                <span className="text-[11px] text-gray-400 font-medium">{c.hint}</span>
               </div>
               <div className="text-3xl font-bold text-[#114A2C] font-[Poppins]">{c.value}</div>
               <div className="text-sm text-gray-500 mt-0.5">{c.label}</div>
@@ -91,18 +99,21 @@ export default async function AdminDashboard() {
         })}
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-6">
-        {/* Recent inquiries */}
-        <div className="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+      <div className="grid xl:grid-cols-3 gap-6">
+        <div className="xl:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
             <h2 className="font-bold text-[#114A2C] font-[Poppins]">Recent Inquiries</h2>
             <Link href="/admin/inquiries" className="text-sm text-[#1D6F42] hover:underline font-medium">
-              View all →
+              View all
             </Link>
           </div>
           <div className="divide-y divide-gray-50">
             {recentInquiries.length === 0 ? (
-              <div className="px-6 py-10 text-center text-gray-400 text-sm">No inquiries yet.</div>
+              <div className="px-6 py-12 text-center">
+                <Inbox className="w-9 h-9 text-gray-300 mx-auto mb-3" />
+                <div className="font-semibold text-[#114A2C]">No inquiries yet.</div>
+                <p className="text-gray-400 text-sm mt-1">Submit an inquiry from the public website.</p>
+              </div>
             ) : (
               recentInquiries.map((inq: InquiryWithCustomer) => (
                 <Link
@@ -115,7 +126,7 @@ export default async function AdminDashboard() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="font-semibold text-sm text-[#2D3748] truncate">{inq.company_name}</div>
-                    <div className="text-xs text-gray-400 truncate">{inq.inquiry_id} · {inq.country} · {inq.product}</div>
+                    <div className="text-xs text-gray-400 truncate">{inq.inquiry_id} | {inq.country} | {inq.product}</div>
                   </div>
                   <div className="flex flex-col items-end gap-1 flex-shrink-0">
                     <StatusBadge status={inq.status} />
@@ -129,7 +140,6 @@ export default async function AdminDashboard() {
           </div>
         </div>
 
-        {/* Status breakdown */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-100">
             <h2 className="font-bold text-[#114A2C] font-[Poppins] flex items-center gap-2">

@@ -28,7 +28,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#0A2E1A] text-white">
       <div className="border-b border-white/10">
-        <div className="w-full max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-12">
+        <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-6 xl:px-10 py-12">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="max-w-xl">
               <h3 className="text-xl font-bold font-[Poppins] mb-1">
@@ -52,7 +52,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="w-full max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-16">
+      <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-6 xl:px-10 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.2fr_0.9fr_1fr_1.15fr] gap-10 xl:gap-12">
           <div>
             <div className="flex items-center gap-2.5 mb-5">
@@ -178,7 +178,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="w-full max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-green-200/55 text-center md:text-left">
+        <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-6 xl:px-10 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-green-200/55 text-center md:text-left">
           <p>Copyright {new Date().getFullYear()} KL TRADERS. All rights reserved. Tamil Nadu, India.</p>
           <p>Premium Agricultural Exports - Worldwide Shipping</p>
         </div>

@@ -3,7 +3,7 @@ export const SITE_CONFIG = {
   tagline: "Premium Agricultural Exports from India",
   description:
     "KL TRADERS specializes in sourcing premium agricultural products directly from trusted farmers across Tamil Nadu, India - delivering Fresh Coriander Leaves and Curry Leaves to global markets with quality, reliability, and trust.",
-  email: "kltraders@gmail.com",
+  email: "kltraders06@gmail.com",
   whatsapp: "+916374791466",
   phone: "+91 6374791466",
   address: "Tamil Nadu, India",
@@ -73,8 +73,7 @@ export const PRODUCTS = [
     subtitle: "Dhania / Cilantro",
     description:
       "Freshly harvested coriander leaves with intense aroma and vibrant color. Grown in ideal Tamil Nadu climate conditions, our coriander is carefully sorted, cleaned, and packed for international export.",
-    image:
-      "https://images.unsplash.com/photo-1580023372750-d20f9b1d4ee3?w=1200&q=90",
+    image: "/images/coriander/fresh-coriander-bundle-11.jpg",
     features: [
       "Freshly harvested daily",
       "Rich, intense aroma",
@@ -98,8 +97,7 @@ export const PRODUCTS = [
     subtitle: "Kadi Patta / Murraya koenigii",
     description:
       "Premium fresh curry leaves sourced directly from Tamil Nadu farms, known for their distinctive fragrance and flavor. Our curry leaves are hand-selected, cleaned, and packed under strict hygiene protocols.",
-    image:
-      "https://images.unsplash.com/photo-1505253758473-96b7015fcd40?w=1200&q=90",
+    image: "/images/curry-leaves/curry-leaf-plantation-15.jpg",
     features: [
       "Premium quality selection",
       "Naturally sourced",
@@ -245,18 +243,34 @@ export const FAQ_ITEMS = [
 ];
 
 export const GALLERY_IMAGES = [
-  { src: "https://images.unsplash.com/photo-1592547253753-24c0012d3765?w=900&q=85", alt: "Green coriander farm in Tamil Nadu", category: "Farm" },
-  { src: "https://images.unsplash.com/photo-1580023372750-d20f9b1d4ee3?w=900&q=85", alt: "Fresh coriander leaves close-up", category: "Products" },
-  { src: "https://images.unsplash.com/photo-1505253758473-96b7015fcd40?w=900&q=85", alt: "Fresh curry leaves", category: "Products" },
-  { src: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=900&q=85", alt: "Agricultural harvest process", category: "Harvest" },
-  { src: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=900&q=85", alt: "Farm field in India", category: "Farm" },
-  { src: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=900&q=85", alt: "Quality inspection process", category: "Quality Inspection" },
-  { src: "https://images.unsplash.com/photo-1487700160041-babef9c3cb55?w=900&q=85", alt: "Export packaging preparation", category: "Packaging" },
-  { src: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=900&q=85", alt: "Fresh herbs harvest", category: "Harvest" },
-  { src: "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8?w=900&q=85", alt: "Fresh green farm rows", category: "Farm" },
-  { src: "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=900&q=85", alt: "Cultivated field landscape", category: "Farm" },
-  { src: "https://images.unsplash.com/photo-1560493676-04071c5f467b?w=900&q=85", alt: "Farm field under clear sky", category: "Farm" },
-  { src: "https://images.unsplash.com/photo-1595855759920-86582396756a?w=900&q=85", alt: "Fresh produce sorting", category: "Quality Inspection" },
+  { src: "/images/gallery/kl-traders-real-03-hero-coriander-field.jpg", alt: "KL TRADERS coriander field close to harvest", category: "Farm" },
+  { src: "/images/gallery/kl-traders-real-22-hero-curry-leaf-farm.jpg", alt: "KL TRADERS curry leaf farm with mountain backdrop", category: "Farm" },
+  { src: "/images/gallery/kl-traders-real-11-fresh-coriander-bundle-11.jpg", alt: "Fresh coriander bundle from KL TRADERS farm", category: "Products" },
+  { src: "/images/gallery/kl-traders-real-15-curry-leaf-plantation-15.jpg", alt: "Fresh curry leaf plantation at KL TRADERS sourcing farm", category: "Products" },
+  { src: "/images/gallery/kl-traders-real-19-curry-leaf-harvest-workers-19.jpg", alt: "Farm workers inspecting curry leaf crop rows", category: "Harvest" },
+  { src: "/images/gallery/kl-traders-real-08-coriander-harvest-crate-08.jpg", alt: "Fresh coriander arranged after harvest", category: "Harvest" },
+  { src: "/images/gallery/kl-traders-real-29-fresh-coriander-sorting-29.jpg", alt: "Fresh coriander sorting before packing", category: "Packaging" },
+  { src: "/images/gallery/kl-traders-real-32-coriander-harvest-hand-32.jpg", alt: "Hand-selected coriander bunch for export", category: "Export" },
+  { src: "/images/gallery/kl-traders-real-07-coriander-farm-bed-07.jpg", alt: "Dense coriander farm bed in Tamil Nadu", category: "Farm" },
+  { src: "/images/gallery/kl-traders-real-12-coriander-field-dense-12.jpg", alt: "Wide coriander cultivation field", category: "Farm" },
+  { src: "/images/gallery/kl-traders-real-17-curry-leaf-field-row-17.jpg", alt: "Curry leaf crop row in red soil", category: "Farm" },
+  { src: "/images/gallery/kl-traders-real-25-curry-leaf-field-row-25.jpg", alt: "Curry leaf field rows ready for harvest", category: "Farm" },
+  { src: "/images/gallery/kl-traders-real-31-coriander-leaves-closeup-31.jpg", alt: "Fresh coriander leaves close-up", category: "Products" },
+  { src: "/images/gallery/kl-traders-real-20-fresh-curry-leaves-closeup-20.jpg", alt: "Fresh curry leaves close-up", category: "Products" },
+  { src: "/images/gallery/kl-traders-real-13-fresh-coriander-bundle-13.jpg", alt: "Coriander bundle with roots after harvesting", category: "Harvest" },
+  { src: "/images/gallery/kl-traders-real-30-fresh-coriander-bundle-30.jpg", alt: "Fresh coriander bunch prepared for sorting", category: "Harvest" },
+  { src: "/images/gallery/kl-traders-real-34-curry-leaf-farm-dense-34.jpg", alt: "Dense curry leaf farm area", category: "Farm" },
+  { src: "/images/gallery/kl-traders-real-43-curry-leaf-farm-slope-43.jpg", alt: "Curry leaf farm on a green slope", category: "Farm" },
+  { src: "/images/gallery/kl-traders-real-38-coriander-field-horizontal-38.jpg", alt: "Horizontal view of coriander growing bed", category: "Farm" },
+  { src: "/images/gallery/kl-traders-real-39-coriander-harvest-hand-39.jpg", alt: "Coriander selected by hand for quality", category: "Export" },
+  { src: "/images/gallery/kl-traders-real-40-coriander-harvest-hand-40.jpg", alt: "Hand checking fresh coriander leaves", category: "Export" },
+  { src: "/images/gallery/kl-traders-real-44-curry-leaf-farm-dense-44.jpg", alt: "Mature curry leaf plants for export supply", category: "Farm" },
+  { src: "/images/gallery/kl-traders-real-46-curry-leaf-farm-sunlight-46.jpg", alt: "Curry leaf farm in natural sunlight", category: "Farm" },
+  { src: "/images/gallery/kl-traders-real-05-fresh-coriander-bunch-05.jpg", alt: "Fresh coriander bunch held after harvest", category: "Products" },
+  { src: "/images/gallery/kl-traders-real-24-fresh-curry-leaves-24.jpg", alt: "Fresh curry leaves selected for buyers", category: "Products" },
+  { src: "/images/gallery/kl-traders-real-33-fresh-coriander-roots-33.jpg", alt: "Fresh coriander roots and leaves after harvest", category: "Harvest" },
+  { src: "/images/gallery/kl-traders-real-41-coriander-leaves-closeup-41.jpg", alt: "Healthy coriander leaves in the field", category: "Products" },
+  { src: "/images/gallery/kl-traders-real-45-coriander-leaves-closeup-45.jpg", alt: "Coriander plants growing in Tamil Nadu soil", category: "Products" },
 ];
 
 export const EXPORT_REGIONS = [

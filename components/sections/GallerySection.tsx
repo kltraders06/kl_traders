@@ -6,7 +6,7 @@ import Image from "next/image";
 import { X, ZoomIn } from "lucide-react";
 import { GALLERY_IMAGES } from "@/constants";
 
-const CATEGORIES = ["All", "Farm", "Harvest", "Products", "Packaging", "Quality Inspection"];
+const CATEGORIES = ["All", "Farm", "Harvest", "Products", "Packaging", "Export"];
 
 export default function GallerySection() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -19,7 +19,7 @@ export default function GallerySection() {
 
   return (
     <section id="gallery" className="py-20 lg:py-24 bg-[#F8FAF8]">
-      <div className="w-full max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-6 xl:px-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}

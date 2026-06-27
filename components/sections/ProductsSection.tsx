@@ -13,7 +13,7 @@ export default function ProductsSection() {
 
   return (
     <section id="products" className="py-20 lg:py-24 bg-[#F8FAF8]">
-      <div className="w-full max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-6 xl:px-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 import { format } from "date-fns";
-import { Download } from "lucide-react";
+import { Download, FileCheck } from "lucide-react";
 import StatusBadge from "@/components/admin/StatusBadge";
 import type { QuoteWithInquiryCustomer } from "@/types";
 import Link from "next/link";
@@ -31,15 +31,17 @@ export default async function QuotesPage() {
     )
     .order("created_at", { ascending: false });
 
-  // Cast once at the boundary — the select string above exactly matches
+  // Cast once at the boundary - the select string above exactly matches
   // QuoteWithInquiryCustomer, so this is safe and narrows fully.
   const rows = (data ?? []) as unknown as QuoteWithInquiryCustomer[];
 
   return (
-    <div className="p-6 lg:p-8">
+    <div className="p-5 sm:p-6 lg:p-8">
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-[#114A2C] font-[Poppins]">Quotes</h1>
-        <p className="text-gray-500 text-sm mt-1">{rows.length} quotes issued</p>
+        <p className="text-gray-500 text-sm mt-1">
+          Quotes are generated from inquiry records and uploaded as PDFs.
+        </p>
       </div>
 
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
@@ -61,7 +63,9 @@ export default async function QuotesPage() {
               {rows.length === 0 ? (
                 <tr>
                   <td colSpan={8} className="px-5 py-12 text-center text-gray-400 text-sm">
-                    No quotes yet.
+                    <FileCheck className="w-9 h-9 text-gray-300 mx-auto mb-3" />
+                    <div className="font-semibold text-[#114A2C]">No quotes yet.</div>
+                    <p className="text-gray-400 mt-1">Open an inquiry and upload a quote PDF when pricing is ready.</p>
                   </td>
                 </tr>
               ) : (
@@ -89,17 +93,17 @@ export default async function QuotesPage() {
                       </td>
 
                       <td className="px-5 py-4 text-sm font-semibold text-[#2D3748]">
-                        {inq?.customers?.company_name ?? "—"}
+                        {inq?.customers?.company_name ?? "-"}
                       </td>
 
                       <td className="px-5 py-4 text-sm text-gray-600">
-                        {inq?.product ?? "—"}
+                        {inq?.product ?? "-"}
                       </td>
 
                       <td className="px-5 py-4 text-sm font-semibold text-[#114A2C]">
                         {q.total_amount != null
                           ? `${q.currency} ${q.total_amount.toLocaleString()}`
-                          : "—"}
+                          : "-"}
                       </td>
 
                       <td className="px-5 py-4">
@@ -133,4 +137,3 @@ export default async function QuotesPage() {
     </div>
   );
 }
-

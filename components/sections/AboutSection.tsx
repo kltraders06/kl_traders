@@ -15,7 +15,7 @@ const values = [
 export default function AboutSection() {
   return (
     <section id="about" className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-6 xl:px-10">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           {/* Image Column */}
           <motion.div
@@ -27,8 +27,8 @@ export default function AboutSection() {
           >
             <div className="relative rounded-3xl overflow-hidden aspect-[4/5] max-w-md mx-auto lg:mx-0">
               <Image
-                src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800&q=90"
-                alt="KL TRADERS farm sourcing in Tamil Nadu"
+                src="/images/harvest/fresh-coriander-bundle-30.jpg"
+                alt="Fresh coriander bunch sourced by KL TRADERS"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 500px"
