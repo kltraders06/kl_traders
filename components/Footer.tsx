@@ -27,11 +27,10 @@ export default function Footer() {
 
   return (
     <footer className="bg-[#0A2E1A] text-white">
-      {/* Newsletter Banner */}
       <div className="border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
+        <div className="w-full max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-12">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div className="max-w-xl">
               <h3 className="text-xl font-bold font-[Poppins] mb-1">
                 Stay Updated on Our Products
               </h3>
@@ -39,7 +38,7 @@ export default function Footer() {
                 Get seasonal availability updates and export news.
               </p>
             </div>
-            <div className="flex w-full md:w-auto gap-3">
+            <div className="flex flex-col sm:flex-row w-full md:w-auto gap-3">
               <input
                 type="email"
                 placeholder="Enter your email"
@@ -53,10 +52,8 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Main Footer */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Company */}
+      <div className="w-full max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.2fr_0.9fr_1fr_1.15fr] gap-10 xl:gap-12">
           <div>
             <div className="flex items-center gap-2.5 mb-5">
               <div className="w-9 h-9 rounded-lg bg-[#1D6F42] flex items-center justify-center">
@@ -71,7 +68,7 @@ export default function Footer() {
                 </div>
               </div>
             </div>
-            <p className="text-green-200/70 text-sm leading-relaxed mb-6">
+            <p className="text-green-200/75 text-sm leading-relaxed mb-6">
               Premium agricultural exports from Tamil Nadu, India. Connecting
               trusted Indian farms with global importers since 2016.
             </p>
@@ -88,7 +85,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Products & Links */}
           <div>
             <h4 className="font-bold text-sm tracking-widest uppercase text-green-400 mb-5">
               Products
@@ -98,7 +94,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <button
                     onClick={() => handleNav(link.href)}
-                    className="text-green-200/70 hover:text-white text-sm transition-colors duration-200"
+                    className="text-green-200/75 hover:text-white text-sm transition-colors duration-200 text-left"
                   >
                     {link.label}
                   </button>
@@ -114,7 +110,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <button
                     onClick={() => handleNav(link.href)}
-                    className="text-green-200/70 hover:text-white text-sm transition-colors duration-200"
+                    className="text-green-200/75 hover:text-white text-sm transition-colors duration-200 text-left"
                   >
                     {link.label}
                   </button>
@@ -123,7 +119,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Export Info */}
           <div>
             <h4 className="font-bold text-sm tracking-widest uppercase text-green-400 mb-5">
               Export Information
@@ -132,16 +127,15 @@ export default function Footer() {
               {exportInfo.map((info) => (
                 <li
                   key={info}
-                  className="flex items-center gap-2 text-green-200/70 text-sm"
+                  className="flex items-start gap-2 text-green-200/75 text-sm"
                 >
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#1D6F42] flex-shrink-0" />
-                  {info}
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#1D6F42] flex-shrink-0 mt-2" />
+                  <span>{info}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact */}
           <div>
             <h4 className="font-bold text-sm tracking-widest uppercase text-green-400 mb-5">
               Contact Us
@@ -149,13 +143,13 @@ export default function Footer() {
             <div className="space-y-4">
               <div className="flex items-start gap-3">
                 <MapPin size={16} className="text-[#1D6F42] mt-0.5 flex-shrink-0" />
-                <span className="text-green-200/70 text-sm">{SITE_CONFIG.address}</span>
+                <span className="text-green-200/75 text-sm">{SITE_CONFIG.address}</span>
               </div>
               <div className="flex items-center gap-3">
                 <Mail size={16} className="text-[#1D6F42] flex-shrink-0" />
                 <a
                   href={`mailto:${SITE_CONFIG.email}`}
-                  className="text-green-200/70 hover:text-white text-sm transition-colors"
+                  className="text-green-200/75 hover:text-white text-sm transition-colors break-all"
                 >
                   {SITE_CONFIG.email}
                 </a>
@@ -164,28 +158,29 @@ export default function Footer() {
                 <Phone size={16} className="text-[#1D6F42] flex-shrink-0" />
                 <a
                   href={`tel:${SITE_CONFIG.whatsapp}`}
-                  className="text-green-200/70 hover:text-white text-sm transition-colors"
+                  className="text-green-200/75 hover:text-white text-sm transition-colors"
                 >
                   {SITE_CONFIG.phone}
                 </a>
               </div>
             </div>
 
-            <button
+            <motion.button
               onClick={() => handleNav("#contact")}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               className="mt-6 w-full bg-[#1D6F42] hover:bg-[#25a85a] text-white py-3 rounded-xl font-semibold text-sm transition-colors duration-300"
             >
               Request a Quote
-            </button>
+            </motion.button>
           </div>
         </div>
       </div>
 
-      {/* Bottom bar */}
       <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-green-200/50">
-          <p>© {new Date().getFullYear()} KL TRADERS. All rights reserved. Tamil Nadu, India.</p>
-          <p>Premium Agricultural Exports · Worldwide Shipping</p>
+        <div className="w-full max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-green-200/55 text-center md:text-left">
+          <p>Copyright {new Date().getFullYear()} KL TRADERS. All rights reserved. Tamil Nadu, India.</p>
+          <p>Premium Agricultural Exports - Worldwide Shipping</p>
         </div>
       </div>
     </footer>

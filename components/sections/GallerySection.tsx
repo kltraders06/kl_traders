@@ -18,15 +18,15 @@ export default function GallerySection() {
       : GALLERY_IMAGES.filter((img) => img.category === activeCategory);
 
   return (
-    <section id="gallery" className="py-24 bg-[#F8FAF8]">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section id="gallery" className="py-20 lg:py-24 bg-[#F8FAF8]">
+      <div className="w-full max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-10 lg:mb-12"
         >
           <span className="text-[#1D6F42] font-semibold text-sm tracking-widest uppercase">
             Gallery
@@ -34,20 +34,20 @@ export default function GallerySection() {
           <h2 className="mt-3 text-4xl lg:text-5xl font-bold text-[#114A2C] tracking-tight">
             Behind the Export
           </h2>
-          <p className="mt-4 text-lg text-gray-600 max-w-xl mx-auto">
+          <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
             A visual journey through our farms, products, and export operations.
           </p>
         </motion.div>
 
         {/* Filter Tabs */}
-        <div className="flex flex-wrap justify-center gap-3 mb-10">
+        <div className="flex flex-wrap justify-center gap-2.5 sm:gap-3 mb-10">
           {CATEGORIES.map((cat) => (
             <motion.button
               key={cat}
               onClick={() => setActiveCategory(cat)}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+              className={`px-4 sm:px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                 activeCategory === cat
                   ? "bg-[#1D6F42] text-white shadow-lg shadow-green-900/20"
                   : "bg-white text-gray-600 border border-gray-200 hover:border-[#1D6F42]"
@@ -61,7 +61,7 @@ export default function GallerySection() {
         {/* Gallery Grid */}
         <motion.div
           layout
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 auto-rows-[240px] sm:auto-rows-[280px] lg:auto-rows-[230px] gap-4 lg:gap-5"
         >
           <AnimatePresence>
             {filtered.map((img, i) => (
@@ -72,8 +72,8 @@ export default function GallerySection() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.4, delay: i * 0.05 }}
-                className={`relative group cursor-pointer rounded-2xl overflow-hidden ${
-                  i === 0 || i === 4 ? "md:col-span-2 md:row-span-2 aspect-square" : "aspect-square"
+                className={`relative group cursor-pointer rounded-[24px] overflow-hidden bg-white shadow-sm border border-white ${
+                  i === 0 || i === 5 ? "sm:col-span-2 lg:row-span-2" : ""
                 }`}
                 onClick={() => setLightboxImg(img.src)}
               >
@@ -82,15 +82,15 @@ export default function GallerySection() {
                   alt={img.alt}
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-700"
-                  sizes="(max-width: 768px) 50vw, 25vw"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
                 {/* Overlay */}
-                <div className="absolute inset-0 bg-[#114A2C]/0 group-hover:bg-[#114A2C]/50 transition-all duration-400 flex items-center justify-center">
+                <div className="absolute inset-0 bg-[#114A2C]/0 group-hover:bg-[#114A2C]/45 transition-all duration-300 flex items-center justify-center">
                   <ZoomIn className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-10 h-10" />
                 </div>
                 {/* Category label */}
-                <div className="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="bg-white/90 text-[#1D6F42] text-xs font-semibold px-3 py-1 rounded-full">
+                <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="bg-white/95 text-[#1D6F42] text-xs font-semibold px-3 py-1.5 rounded-full shadow-sm">
                     {img.category}
                   </span>
                 </div>

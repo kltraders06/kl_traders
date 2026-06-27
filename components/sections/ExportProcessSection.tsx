@@ -43,7 +43,7 @@ export default function ExportProcessSection() {
           </h2>
           <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
             A transparent, step-by-step journey that ensures quality at every
-            stage — from our farmers to your facility.
+            stage - from our farmers to your facility.
           </p>
         </motion.div>
 
@@ -100,7 +100,7 @@ export default function ExportProcessSection() {
             Ready to Start Your Import?
           </h3>
           <p className="text-green-200 mb-6 max-w-md mx-auto">
-            Our team handles all documentation, compliance, and logistics — so
+            Our team handles all documentation, compliance, and logistics - so
             you can focus on your business.
           </p>
           <motion.button

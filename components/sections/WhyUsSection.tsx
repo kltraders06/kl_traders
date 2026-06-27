@@ -44,7 +44,7 @@ export default function WhyUsSection() {
           </h2>
           <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
             International buyers choose KL TRADERS because we deliver more than
-            products — we deliver peace of mind.
+            products - we deliver peace of mind.
           </p>
         </motion.div>
 

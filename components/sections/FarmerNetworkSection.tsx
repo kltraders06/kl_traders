@@ -44,12 +44,12 @@ export default function FarmerNetworkSection() {
             <p className="mt-6 text-green-100/90 text-lg leading-relaxed">
               Our network of 200+ verified farmers across Tamil Nadu is the
               foundation of our reliability. We build long-term relationships with
-              growers who follow our quality guidelines — ensuring consistent,
+              growers who follow our quality guidelines - ensuring consistent,
               traceable produce for every shipment.
             </p>
             <p className="mt-4 text-green-200/80 leading-relaxed">
               By eliminating middlemen, we deliver fresher produce at more
-              competitive prices — while paying fair rates to the farmers who grow
+              competitive prices - while paying fair rates to the farmers who grow
               it. This direct connection is what gives our buyers the confidence
               of a reliable, scalable supply chain.
             </p>

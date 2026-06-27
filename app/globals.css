@@ -15,8 +15,17 @@ body {
   color: #2D3748;
   background: #FFFFFF;
   overflow-x: hidden;
+  text-rendering: optimizeLegibility;
 }
 h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+
+section {
+  width: 100%;
+}
+
+img {
+  max-width: 100%;
+}
 
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #f1f1f1; }

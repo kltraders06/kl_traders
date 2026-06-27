@@ -80,7 +80,7 @@ export default function AboutSection() {
               </div>
               <p className="text-[#2D3748] leading-relaxed">
                 To connect Indian agricultural producers with international
-                markets through quality products and dependable service — creating
+                markets through quality products and dependable service - creating
                 lasting value for farmers, buyers, and communities.
               </p>
             </div>
@@ -117,7 +117,7 @@ export default function AboutSection() {
                       <span className="font-semibold text-[#114A2C]">
                         {value.name}
                       </span>{" "}
-                      <span className="text-gray-500 text-sm">— {value.desc}</span>
+                      <span className="text-gray-500 text-sm">- {value.desc}</span>
                     </div>
                   </motion.div>
                 ))}

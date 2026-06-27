@@ -2,12 +2,12 @@ export const SITE_CONFIG = {
   name: "KL TRADERS",
   tagline: "Premium Agricultural Exports from India",
   description:
-    "KL TRADERS specializes in sourcing premium agricultural products directly from trusted farmers across Tamil Nadu, India — delivering Fresh Coriander Leaves and Curry Leaves to global markets with quality, reliability, and trust.",
-  email: "info@kltraders.in",
-  whatsapp: "+919876543210",
-  phone: "+91 98765 43210",
+    "KL TRADERS specializes in sourcing premium agricultural products directly from trusted farmers across Tamil Nadu, India - delivering Fresh Coriander Leaves and Curry Leaves to global markets with quality, reliability, and trust.",
+  email: "kltraders@gmail.com",
+  whatsapp: "+916374791466",
+  phone: "+91 6374791466",
   address: "Tamil Nadu, India",
-  workingHours: "Mon – Sat: 9:00 AM – 6:00 PM IST",
+  workingHours: "Mon - Sat: 9:00 AM - 6:00 PM IST",
   url: "https://kltraders.in",
 };
 
@@ -44,7 +44,7 @@ export const TRUST_FEATURES = [
     icon: "Globe",
     title: "International Standards",
     description:
-      "Compliant with EU, GCC, and US import regulations — full documentation, traceability, and certifications provided.",
+      "Compliant with EU, GCC, and US import regulations - full documentation, traceability, and certifications provided.",
   },
   {
     icon: "Truck",
@@ -56,7 +56,7 @@ export const TRUST_FEATURES = [
     icon: "Package",
     title: "Bulk Order Ready",
     description:
-      "We handle high-volume orders with ease — from trial shipments to full container loads.",
+      "We handle high-volume orders with ease - from trial shipments to full container loads.",
   },
   {
     icon: "Zap",
@@ -74,7 +74,7 @@ export const PRODUCTS = [
     description:
       "Freshly harvested coriander leaves with intense aroma and vibrant color. Grown in ideal Tamil Nadu climate conditions, our coriander is carefully sorted, cleaned, and packed for international export.",
     image:
-      "https://images.unsplash.com/photo-1580023372750-d20f9b1d4ee3?w=800&q=90",
+      "https://images.unsplash.com/photo-1580023372750-d20f9b1d4ee3?w=1200&q=90",
     features: [
       "Freshly harvested daily",
       "Rich, intense aroma",
@@ -84,7 +84,7 @@ export const PRODUCTS = [
       "Custom export packaging",
     ],
     specs: {
-      "Shelf Life": "7–10 days (refrigerated)",
+      "Shelf Life": "7-10 days (refrigerated)",
       MOQ: "500 kg per shipment",
       Packaging: "5kg / 10kg cartons with moisture control",
       Availability: "Year-round",
@@ -99,7 +99,7 @@ export const PRODUCTS = [
     description:
       "Premium fresh curry leaves sourced directly from Tamil Nadu farms, known for their distinctive fragrance and flavor. Our curry leaves are hand-selected, cleaned, and packed under strict hygiene protocols.",
     image:
-      "https://images.unsplash.com/photo-1505253758473-96b7015fcd40?w=800&q=90",
+      "https://images.unsplash.com/photo-1505253758473-96b7015fcd40?w=1200&q=90",
     features: [
       "Premium quality selection",
       "Naturally sourced",
@@ -109,7 +109,7 @@ export const PRODUCTS = [
       "Consistent supply guaranteed",
     ],
     specs: {
-      "Shelf Life": "5–7 days (refrigerated)",
+      "Shelf Life": "5-7 days (refrigerated)",
       MOQ: "200 kg per shipment",
       Packaging: "2kg / 5kg punnets and cartons",
       Availability: "Year-round",
@@ -131,7 +131,7 @@ export const EXPORT_STEPS = [
     number: "02",
     title: "Quality Inspection",
     description:
-      "Every batch undergoes rigorous quality checks — color, aroma, freshness, and contamination tests.",
+      "Every batch undergoes rigorous quality checks - color, aroma, freshness, and contamination tests.",
     icon: "ClipboardCheck",
   },
   {
@@ -152,7 +152,7 @@ export const EXPORT_STEPS = [
     number: "05",
     title: "Documentation",
     description:
-      "Full export documentation — phytosanitary certificates, customs clearance, and origin certificates.",
+      "Full export documentation - phytosanitary certificates, customs clearance, and origin certificates.",
     icon: "FileText",
   },
   {
@@ -177,23 +177,23 @@ export const TESTIMONIALS = [
     role: "General Manager",
     company: "Al Rashidi Fresh Foods",
     country: "UAE",
-    flag: "🇦🇪",
-    text: "KL TRADERS has been our primary supplier of coriander leaves for over 3 years. Their consistency in quality and delivery schedules is unmatched. We've never had a rejected shipment.",
+    flag: "UAE",
+    text: "KL TRADERS has been our primary supplier of coriander leaves for over 3 years. Their consistency in quality and delivery schedules is unmatched. We have never had a rejected shipment.",
   },
   {
-    name: "Sarah Müller",
+    name: "Sarah Muller",
     role: "Procurement Director",
     company: "EuroGreen Imports GmbH",
     country: "Germany",
-    flag: "🇩🇪",
-    text: "Exceptional quality and very competitive pricing. Their documentation is always complete and they understand EU import requirements very well. A true professional export partner.",
+    flag: "DE",
+    text: "Exceptional quality and very competitive pricing. Their documentation is always complete, and they understand EU import requirements very well. A true professional export partner.",
   },
   {
     name: "Raj Krishnan",
     role: "Head of Sourcing",
     company: "FreshMart Supermarkets",
     country: "Malaysia",
-    flag: "🇲🇾",
+    flag: "MY",
     text: "We started with a trial order and immediately switched to container loads. The freshness of their curry leaves is remarkable even after shipping. Highly recommended.",
   },
   {
@@ -201,7 +201,7 @@ export const TESTIMONIALS = [
     role: "Import Operations Manager",
     company: "Gulf Fresh Distribution",
     country: "Qatar",
-    flag: "🇶🇦",
+    flag: "QA",
     text: "Reliable, professional, and responsive. KL TRADERS understands the urgency in fresh produce exports. Their WhatsApp communication and quick turnaround make them our go-to supplier.",
   },
 ];
@@ -220,7 +220,7 @@ export const WHY_CHOOSE_US = [
 export const FAQ_ITEMS = [
   {
     q: "What is the minimum order quantity (MOQ)?",
-    a: "Our MOQ for fresh coriander leaves is 500 kg and for curry leaves is 200 kg per shipment. We can accommodate trial orders for new customers — contact us to discuss your requirements.",
+    a: "Our MOQ for fresh coriander leaves is 500 kg and for curry leaves is 200 kg per shipment. We can accommodate trial orders for new customers - contact us to discuss your requirements.",
   },
   {
     q: "What packaging options are available?",
@@ -228,63 +228,35 @@ export const FAQ_ITEMS = [
   },
   {
     q: "What shipping methods do you use?",
-    a: "We use both air freight (for time-sensitive orders) and sea freight (for bulk shipments). We work with reliable freight forwarders experienced in fresh produce export from India.",
+    a: "We use both air freight for time-sensitive orders and sea freight for bulk shipments. We work with reliable freight forwarders experienced in fresh produce export from India.",
   },
   {
     q: "What quality certifications do you hold?",
-    a: "Our products comply with APEDA (Agricultural and Processed Food Products Export Development Authority) standards and meet EU, GCC, and US phytosanitary requirements. We provide full certification with every shipment.",
+    a: "Our products comply with APEDA standards and meet EU, GCC, and US phytosanitary requirements. We provide full certification with every shipment.",
   },
   {
     q: "What documentation is provided with shipments?",
-    a: "We provide phytosanitary certificates, certificate of origin, commercial invoice, packing list, bill of lading/airway bill, and any destination-specific documents required by your country's import authorities.",
+    a: "We provide phytosanitary certificates, certificate of origin, commercial invoice, packing list, bill of lading or airway bill, and destination-specific documents required by import authorities.",
   },
   {
     q: "What is the typical lead time from order to shipment?",
-    a: "For standard orders, lead time is 3–5 business days for air freight and 7–10 days for sea freight. We harvest to order to ensure maximum freshness upon arrival.",
+    a: "For standard orders, lead time is 3-5 business days for air freight and 7-10 days for sea freight. We harvest to order to ensure maximum freshness upon arrival.",
   },
 ];
 
 export const GALLERY_IMAGES = [
-  {
-    src: "https://images.unsplash.com/photo-1592547253753-24c0012d3765?w=600&q=85",
-    alt: "Green coriander farm in Tamil Nadu",
-    category: "Farm",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1580023372750-d20f9b1d4ee3?w=600&q=85",
-    alt: "Fresh coriander leaves close-up",
-    category: "Products",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1505253758473-96b7015fcd40?w=600&q=85",
-    alt: "Fresh curry leaves",
-    category: "Products",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=85",
-    alt: "Agricultural harvest process",
-    category: "Harvest",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600&q=85",
-    alt: "Farm field sunset",
-    category: "Farm",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&q=85",
-    alt: "Quality inspection process",
-    category: "Quality Inspection",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1487700160041-babef9c3cb55?w=600&q=85",
-    alt: "Export packaging preparation",
-    category: "Packaging",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600&q=85",
-    alt: "Fresh herbs harvest",
-    category: "Harvest",
-  },
+  { src: "https://images.unsplash.com/photo-1592547253753-24c0012d3765?w=900&q=85", alt: "Green coriander farm in Tamil Nadu", category: "Farm" },
+  { src: "https://images.unsplash.com/photo-1580023372750-d20f9b1d4ee3?w=900&q=85", alt: "Fresh coriander leaves close-up", category: "Products" },
+  { src: "https://images.unsplash.com/photo-1505253758473-96b7015fcd40?w=900&q=85", alt: "Fresh curry leaves", category: "Products" },
+  { src: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=900&q=85", alt: "Agricultural harvest process", category: "Harvest" },
+  { src: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=900&q=85", alt: "Farm field in India", category: "Farm" },
+  { src: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=900&q=85", alt: "Quality inspection process", category: "Quality Inspection" },
+  { src: "https://images.unsplash.com/photo-1487700160041-babef9c3cb55?w=900&q=85", alt: "Export packaging preparation", category: "Packaging" },
+  { src: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=900&q=85", alt: "Fresh herbs harvest", category: "Harvest" },
+  { src: "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8?w=900&q=85", alt: "Fresh green farm rows", category: "Farm" },
+  { src: "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=900&q=85", alt: "Cultivated field landscape", category: "Farm" },
+  { src: "https://images.unsplash.com/photo-1560493676-04071c5f467b?w=900&q=85", alt: "Farm field under clear sky", category: "Farm" },
+  { src: "https://images.unsplash.com/photo-1595855759920-86582396756a?w=900&q=85", alt: "Fresh produce sorting", category: "Quality Inspection" },
 ];
 
 export const EXPORT_REGIONS = [

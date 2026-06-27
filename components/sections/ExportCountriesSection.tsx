@@ -22,7 +22,7 @@ export default function ExportCountriesSection() {
             Countries We Export To
           </h2>
           <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-            From the farms of Tamil Nadu to tables across five continents — our
+            From the farms of Tamil Nadu to tables across five continents - our
             products reach over 15 countries worldwide.
           </p>
         </motion.div>
