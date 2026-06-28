@@ -64,35 +64,38 @@ export default async function AdminDashboard() {
   ];
 
   return (
-    <div className="p-5 sm:p-6 lg:p-8">
-      <div className="mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+    <div className="p-4 sm:p-6 xl:p-8">
+      <div className="mb-8 overflow-hidden rounded-3xl bg-gradient-to-r from-[#0A2E1A] to-[#1D6F42] p-6 text-white shadow-xl shadow-green-950/10 sm:p-8">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-[#114A2C] font-[Poppins]">Dashboard</h1>
-          <p className="text-gray-500 text-sm mt-1">
+          <p className="text-xs font-bold uppercase tracking-widest text-green-200">Admin Workspace</p>
+          <h1 className="mt-2 text-2xl font-bold font-[Poppins] sm:text-3xl">Dashboard</h1>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-green-100/85">
             Overview of inquiries, customers, quotes, and invoice uploads.
           </p>
         </div>
         <Link
           href="/"
           target="_blank"
-          className="inline-flex w-fit rounded-xl bg-[#1D6F42] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#114A2C]"
+          className="inline-flex w-fit rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-[#1D6F42] hover:bg-green-50"
         >
           View Website
         </Link>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
         {statCards.map((c) => {
           const Icon = c.icon;
           return (
-            <div key={c.label} className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+            <div key={c.label} className="bg-white rounded-3xl p-5 shadow-sm border border-gray-100">
               <div className="flex items-start justify-between gap-4">
-                <div className={`w-10 h-10 ${c.color} rounded-xl flex items-center justify-center mb-3`}>
+                <div className={`w-12 h-12 ${c.color} rounded-2xl flex items-center justify-center mb-4 shadow-sm`}>
                   <Icon className="w-5 h-5 text-white" />
                 </div>
                 <span className="text-[11px] text-gray-400 font-medium">{c.hint}</span>
               </div>
-              <div className="text-3xl font-bold text-[#114A2C] font-[Poppins]">{c.value}</div>
+              <div className="text-4xl font-bold text-[#114A2C] font-[Poppins]">{c.value}</div>
               <div className="text-sm text-gray-500 mt-0.5">{c.label}</div>
             </div>
           );

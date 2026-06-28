@@ -39,8 +39,9 @@ export default function InquiriesClient({
   return (
     <div className={`transition-opacity duration-200 ${isPending ? "opacity-60" : ""}`}>
       {/* Search + Filter bar */}
-      <div className="flex flex-col sm:flex-row gap-3 mb-5">
-        <div className="relative flex-1 max-w-sm">
+      <div className="mb-5 rounded-3xl border border-gray-100 bg-white p-4 shadow-sm">
+      <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
+        <div className="relative flex-1 max-w-xl">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
           <input
             type="text"
@@ -81,9 +82,10 @@ export default function InquiriesClient({
           })}
         </div>
       </div>
+      </div>
 
       {/* Table */}
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>

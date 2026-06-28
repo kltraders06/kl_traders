@@ -13,7 +13,7 @@ const highlights = [
 
 export default function FarmerNetworkSection() {
   return (
-    <section className="relative py-24 overflow-hidden">
+    <section className="relative overflow-hidden py-16 sm:py-20 lg:py-24">
       {/* Background */}
       <Image
         src="/images/hero/hero-curry-leaf-farm.jpg"
@@ -24,19 +24,19 @@ export default function FarmerNetworkSection() {
       />
       <div className="absolute inset-0 bg-gradient-to-r from-[#114A2C]/95 via-[#114A2C]/85 to-[#1D6F42]/70" />
 
-      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-5 sm:px-6 xl:px-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-10 lg:grid-cols-2 lg:gap-14 items-center">
           {/* Content */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
             <span className="text-green-300 font-semibold text-sm tracking-widest uppercase">
               Our Farmer Network
             </span>
-            <h2 className="mt-4 text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
+            <h2 className="mt-4 text-3xl sm:text-4xl lg:text-[44px] font-bold text-white tracking-tight leading-tight">
               Directly from
               <br />
               the Source
@@ -70,8 +70,8 @@ export default function FarmerNetworkSection() {
 
           {/* Stats cards */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
             className="grid grid-cols-2 gap-5"

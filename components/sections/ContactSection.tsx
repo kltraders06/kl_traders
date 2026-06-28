@@ -75,8 +75,8 @@ export default function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="py-20 lg:py-24 bg-white">
-      <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-6 xl:px-10">
+    <section id="contact" className="w-full overflow-hidden bg-white py-16 sm:py-20 lg:py-24">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -87,7 +87,7 @@ export default function ContactSection() {
           <span className="text-[#1D6F42] font-semibold text-sm tracking-widest uppercase">
             Get in Touch
           </span>
-          <h2 className="mt-3 text-4xl lg:text-5xl font-bold text-[#114A2C] tracking-tight">
+          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-[44px] font-bold text-[#114A2C] tracking-tight">
             Request a Quote
           </h2>
           <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
@@ -96,13 +96,13 @@ export default function ContactSection() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-[0.9fr_1.35fr] gap-10 lg:gap-14 xl:gap-16 items-start">
+        <div className="grid gap-8 lg:grid-cols-[380px_minmax(0,1fr)] lg:gap-10 xl:gap-12 items-start">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="space-y-6 lg:sticky lg:top-28"
+            className="min-w-0 space-y-6 lg:sticky lg:top-28"
           >
             <div>
               <h3 className="text-2xl font-bold text-[#114A2C] font-[Poppins]">
@@ -114,7 +114,7 @@ export default function ContactSection() {
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-4">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
               {contactItems.map((item) => {
                 const Icon = item.icon;
                 const inner = (
@@ -160,13 +160,13 @@ export default function ContactSection() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
             className="min-w-0"
           >
-            <div className="bg-[#F8FAF8] rounded-[28px] p-5 sm:p-8 lg:p-10 border border-gray-100 shadow-sm">
+            <div className="mx-auto w-full max-w-3xl rounded-[28px] border border-gray-100 bg-[#F8FAF8] p-5 shadow-sm sm:p-7 lg:p-8">
               <AnimatePresence mode="wait">
                 {status === "success" && (
                   <motion.div key="success" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="text-center py-12">

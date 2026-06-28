@@ -1,5 +1,9 @@
 import type { InquiryStatus } from "@/types";
 
+export function cn(...classes: Array<string | false | null | undefined>) {
+  return classes.filter(Boolean).join(" ");
+}
+
 /** Status badge styling map */
 export const STATUS_CONFIG: Record<
   InquiryStatus,

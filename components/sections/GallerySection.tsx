@@ -18,8 +18,8 @@ export default function GallerySection() {
       : GALLERY_IMAGES.filter((img) => img.category === activeCategory);
 
   return (
-    <section id="gallery" className="py-20 lg:py-24 bg-[#F8FAF8]">
-      <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-6 xl:px-10">
+    <section id="gallery" className="w-full overflow-hidden bg-[#F8FAF8] py-16 sm:py-20 lg:py-24">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -31,7 +31,7 @@ export default function GallerySection() {
           <span className="text-[#1D6F42] font-semibold text-sm tracking-widest uppercase">
             Gallery
           </span>
-          <h2 className="mt-3 text-4xl lg:text-5xl font-bold text-[#114A2C] tracking-tight">
+          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-[44px] font-bold text-[#114A2C] tracking-tight">
             Behind the Export
           </h2>
           <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
@@ -61,7 +61,7 @@ export default function GallerySection() {
         {/* Gallery Grid */}
         <motion.div
           layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 auto-rows-[240px] sm:auto-rows-[280px] lg:auto-rows-[230px] gap-4 lg:gap-5"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 auto-rows-[230px] sm:auto-rows-[260px] lg:auto-rows-[220px] gap-4 lg:gap-5"
         >
           <AnimatePresence>
             {filtered.map((img, i) => (

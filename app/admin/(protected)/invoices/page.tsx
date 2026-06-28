@@ -34,15 +34,23 @@ export default async function InvoicesPage() {
   const rows = (data ?? []) as unknown as InvoiceWithInquiryCustomer[];
 
   return (
-    <div className="p-5 sm:p-6 lg:p-8">
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-[#114A2C] font-[Poppins]">Invoices</h1>
+    <div className="p-4 sm:p-6 xl:p-8">
+      <div className="mb-6 rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
+        <p className="text-xs font-bold uppercase tracking-widest text-[#1D6F42]">Commercial Documents</p>
+        <h1 className="mt-2 text-2xl font-bold text-[#114A2C] font-[Poppins]">Invoices</h1>
         <p className="text-gray-500 text-sm mt-1">
           Invoices are uploaded after quote confirmation. Automatic invoice generation is not implemented yet.
         </p>
       </div>
 
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+      <div className="mb-5 rounded-3xl border border-amber-100 bg-amber-50/80 p-5">
+        <div className="font-bold text-amber-900">Workflow</div>
+        <p className="mt-1 text-sm leading-6 text-amber-800/75">
+          Feature not implemented yet: automatic invoice generation. Upload invoice PDFs after quote confirmation.
+        </p>
+      </div>
+
+      <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>

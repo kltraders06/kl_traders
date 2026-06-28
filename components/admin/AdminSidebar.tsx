@@ -19,22 +19,22 @@ export default function AdminSidebar() {
   const path = usePathname();
 
   return (
-    <aside className="w-64 bg-[#0A2E1A] text-white flex flex-col min-h-screen sticky top-0">
+    <aside className="hidden w-72 bg-[#0A2E1A] text-white lg:flex flex-col min-h-screen sticky top-0 shadow-2xl shadow-black/20">
       {/* Logo */}
-      <div className="px-6 py-6 border-b border-white/10">
+      <div className="px-6 py-7 border-b border-white/10">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 bg-[#1D6F42] rounded-lg flex items-center justify-center">
-            <Leaf className="w-4 h-4 text-white" fill="white" />
+          <div className="w-11 h-11 bg-[#1D6F42] rounded-2xl flex items-center justify-center shadow-lg shadow-green-950/30">
+            <Leaf className="w-5 h-5 text-white" fill="white" />
           </div>
           <div>
-            <div className="font-bold text-sm font-[Poppins]">KL TRADERS</div>
+            <div className="font-bold text-base font-[Poppins]">KL TRADERS</div>
             <div className="text-[10px] text-green-400 tracking-widest">ADMIN PANEL</div>
           </div>
         </div>
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 px-3 py-5 space-y-1">
+      <nav className="flex-1 px-4 py-6 space-y-2">
         {NAV.map(({ href, icon: Icon, label }) => {
           const active = href === "/admin"
             ? path === "/admin"
@@ -43,9 +43,9 @@ export default function AdminSidebar() {
             <Link
               key={href}
               href={href}
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 group ${
+              className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl text-sm font-semibold transition-all duration-200 group ${
                 active
-                  ? "bg-[#1D6F42] text-white"
+                  ? "bg-[#1D6F42] text-white shadow-lg shadow-green-950/20"
                   : "text-green-200/70 hover:text-white hover:bg-white/5"
               }`}
             >
@@ -58,7 +58,13 @@ export default function AdminSidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="px-4 py-5 border-t border-white/10 space-y-3">
+      <div className="px-5 py-5 border-t border-white/10 space-y-3">
+        <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+          <div className="text-xs font-bold uppercase tracking-widest text-green-300">Workflow</div>
+          <p className="mt-2 text-xs leading-5 text-green-100/70">
+            Review inquiries, upload quote PDFs, then upload invoice PDFs after confirmation.
+          </p>
+        </div>
         <Link
           href="/"
           target="_blank"

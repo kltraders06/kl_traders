@@ -43,9 +43,10 @@ export default async function InquiriesPage({ searchParams }: PageProps) {
   const totalPages = Math.ceil(total / pageSize);
 
   return (
-    <div className="p-6 lg:p-8">
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-[#114A2C] font-[Poppins]">Inquiries</h1>
+    <div className="p-4 sm:p-6 xl:p-8">
+      <div className="mb-6 rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
+        <p className="text-xs font-bold uppercase tracking-widest text-[#1D6F42]">Buyer Pipeline</p>
+        <h1 className="mt-2 text-2xl font-bold text-[#114A2C] font-[Poppins]">Inquiries</h1>
         <p className="text-gray-500 text-sm mt-1">
           {total} total inquir{total !== 1 ? "ies" : "y"}
         </p>

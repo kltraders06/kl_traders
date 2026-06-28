@@ -33,7 +33,7 @@ export default function Navbar() {
             : "bg-transparent"
         }`}
       >
-        <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-6 xl:px-10">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <motion.div
@@ -63,7 +63,7 @@ export default function Navbar() {
             </motion.div>
 
             {/* Desktop Nav */}
-            <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
+            <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
               {NAV_LINKS.map((link) => (
                 <button
                   key={link.href}
@@ -78,14 +78,14 @@ export default function Navbar() {
             </nav>
 
             {/* CTA */}
-            <div className="hidden lg:flex items-center gap-4">
+            <div className="hidden lg:flex items-center gap-2 xl:gap-3">
               <motion.a
                 href={`https://wa.me/${SITE_CONFIG.whatsapp.replace(/\D/g, "")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold tracking-wide transition-colors duration-300 ${
+                className={`inline-flex items-center gap-2 px-3 py-2.5 rounded-full text-sm font-semibold tracking-wide transition-colors duration-300 ${
                   scrolled
                     ? "text-[#1D6F42] bg-[#E8F5E9]"
                     : "text-white bg-white/10 border border-white/20"
@@ -98,7 +98,7 @@ export default function Navbar() {
                 onClick={() => handleNav("#contact")}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="bg-[#1D6F42] hover:bg-[#114A2C] text-white px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide transition-colors duration-300 shadow-lg shadow-green-900/20"
+                className="bg-[#1D6F42] hover:bg-[#114A2C] text-white px-4 xl:px-5 py-2.5 rounded-full text-sm font-semibold tracking-wide transition-colors duration-300 shadow-lg shadow-green-900/20"
               >
                 Request Quote
               </motion.button>

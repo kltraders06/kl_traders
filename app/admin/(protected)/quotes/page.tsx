@@ -36,15 +36,23 @@ export default async function QuotesPage() {
   const rows = (data ?? []) as unknown as QuoteWithInquiryCustomer[];
 
   return (
-    <div className="p-5 sm:p-6 lg:p-8">
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-[#114A2C] font-[Poppins]">Quotes</h1>
+    <div className="p-4 sm:p-6 xl:p-8">
+      <div className="mb-6 rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
+        <p className="text-xs font-bold uppercase tracking-widest text-[#1D6F42]">Commercial Documents</p>
+        <h1 className="mt-2 text-2xl font-bold text-[#114A2C] font-[Poppins]">Quotes</h1>
         <p className="text-gray-500 text-sm mt-1">
           Quotes are generated from inquiry records and uploaded as PDFs.
         </p>
       </div>
 
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+      <div className="mb-5 rounded-3xl border border-purple-100 bg-purple-50/70 p-5">
+        <div className="font-bold text-purple-900">Workflow</div>
+        <p className="mt-1 text-sm leading-6 text-purple-800/75">
+          Feature not implemented yet: automatic quote generation. Use inquiry detail pages to upload prepared quote PDFs.
+        </p>
+      </div>
+
+      <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>

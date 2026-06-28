@@ -8,7 +8,7 @@
   --accent: #E8F5E9;
 }
 
-* { box-sizing: border-box; padding: 0; margin: 0; }
+* { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
   font-family: 'Inter', sans-serif;
@@ -16,6 +16,7 @@ body {
   background: #FFFFFF;
   overflow-x: hidden;
   text-rendering: optimizeLegibility;
+  margin: 0;
 }
 h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
 

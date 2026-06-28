@@ -34,8 +34,8 @@ export default function ExportCountriesSection() {
             {EXPORT_REGIONS.slice(0, 2).map((region, i) => (
               <motion.div
                 key={region.name}
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.6 }}
                 className="bg-[#F8FAF8] rounded-2xl p-6 border border-gray-100"
@@ -117,8 +117,8 @@ export default function ExportCountriesSection() {
             {EXPORT_REGIONS.slice(2).map((region, i) => (
               <motion.div
                 key={region.name}
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.6 }}
                 className="bg-[#F8FAF8] rounded-2xl p-6 border border-gray-100"
