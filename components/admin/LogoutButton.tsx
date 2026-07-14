@@ -11,6 +11,7 @@ export default function LogoutButton() {
 
   async function handleLogout() {
     setLoading(true);
+    document.cookie = "kltraders_admin_session=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
     await getSupabaseClient().auth.signOut();
     router.replace("/admin/login");
     router.refresh();

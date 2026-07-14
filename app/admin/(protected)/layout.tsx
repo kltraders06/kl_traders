@@ -1,5 +1,6 @@
 import AdminSidebar from "@/components/admin/AdminSidebar";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { cookies } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -13,7 +14,10 @@ export default async function ProtectedAdminLayout({
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) {
+  const cookieStore = await cookies();
+  const isCustomAdmin = cookieStore.get("kltraders_admin_session")?.value === "true";
+
+  if (!user && !isCustomAdmin) {
     redirect("/admin/login");
   }
 
@@ -24,9 +28,10 @@ export default async function ProtectedAdminLayout({
         <div className="sticky top-0 z-30 border-b border-gray-100 bg-white/95 px-4 py-3 backdrop-blur lg:hidden">
           <div className="flex items-center justify-between">
             <div className="font-[Poppins] font-bold text-[#114A2C]">KL TRADERS Admin</div>
-            <div className="flex gap-3 text-xs font-semibold text-[#1D6F42]">
+            <div className="flex gap-4 text-xs font-semibold text-[#1D6F42]">
               <Link href="/admin">Dashboard</Link>
               <Link href="/admin/inquiries">Inquiries</Link>
+              <Link href="/admin/customers">Customers</Link>
             </div>
           </div>
         </div>

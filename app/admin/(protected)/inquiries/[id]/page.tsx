@@ -104,6 +104,40 @@ export default async function InquiryDetailPage({ params }: PageProps) {
                 ) : inner;
               })}
             </div>
+            
+            {/* Quick Actions */}
+            <div className="mt-5 pt-4 border-t border-gray-100">
+              <div className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Quick Actions</div>
+              <div className="grid grid-cols-3 gap-2">
+                <a
+                  href={`mailto:${inquiry.email}?subject=${encodeURIComponent(`Re: KL TRADERS Inquiry ${inquiry.inquiry_id}`)}&body=${encodeURIComponent(`Hi ${inquiry.full_name},\n\nThank you for contacting KL TRADERS regarding your inquiry for ${inquiry.product}.\n\nBest regards,\nKL TRADERS`)}`}
+                  className="flex flex-col items-center justify-center p-2 rounded-xl border border-blue-100 bg-blue-50/50 text-blue-600 hover:bg-blue-100 hover:scale-[1.02] active:scale-[0.98] transition-all font-semibold text-xs text-center"
+                >
+                  <Mail className="w-4 h-4 mb-1" />
+                  Email
+                </a>
+                {inquiry.whatsapp && (
+                  <a
+                    href={`https://wa.me/${inquiry.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(`Hi ${inquiry.full_name}, this is KL TRADERS regarding your inquiry ${inquiry.inquiry_id} for ${inquiry.product}...`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex flex-col items-center justify-center p-2 rounded-xl border border-green-100 bg-green-50/50 text-green-600 hover:bg-green-100 hover:scale-[1.02] active:scale-[0.98] transition-all font-semibold text-xs text-center"
+                  >
+                    <MessageCircle className="w-4 h-4 mb-1" />
+                    WhatsApp
+                  </a>
+                )}
+                {inquiry.whatsapp && (
+                  <a
+                    href={`tel:${inquiry.whatsapp.replace(/\D/g, "")}`}
+                    className="flex flex-col items-center justify-center p-2 rounded-xl border border-amber-100 bg-amber-50/50 text-amber-600 hover:bg-amber-100 hover:scale-[1.02] active:scale-[0.98] transition-all font-semibold text-xs text-center"
+                  >
+                    <Phone className="w-4 h-4 mb-1" />
+                    Call
+                  </a>
+                )}
+              </div>
+            </div>
           </div>
 
           {/* Inquiry details */}

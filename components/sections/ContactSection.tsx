@@ -32,6 +32,7 @@ const PREFERRED_COMM: PreferredComm[] = ["Email", "WhatsApp", "Both"];
 export default function ContactSection() {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [submittedId, setSubmittedId] = useState("");
+  const [submittedData, setSubmittedData] = useState<ContactFormData | null>(null);
 
   const {
     register,
@@ -53,6 +54,7 @@ export default function ContactSection() {
       const json = await res.json();
       if (!res.ok || !json.success) throw new Error(json.error);
       setSubmittedId(json.data.inquiry_id);
+      setSubmittedData(data);
       setStatus("success");
       reset();
     } catch (err) {
@@ -69,7 +71,7 @@ export default function ContactSection() {
   const contactItems = [
     { icon: MapPin, label: "Address", value: SITE_CONFIG.address },
     { icon: Mail, label: "Email", value: SITE_CONFIG.email, href: `mailto:${SITE_CONFIG.email}` },
-    { icon: Phone, label: "Phone", value: SITE_CONFIG.phone, href: `tel:${SITE_CONFIG.whatsapp}` },
+    { icon: Phone, label: "Phone", value: SITE_CONFIG.phone, href: `tel:${SITE_CONFIG.phone.replace(/\s+/g, "")}` },
     { icon: MessageCircle, label: "WhatsApp", value: SITE_CONFIG.phone, href: `https://wa.me/${SITE_CONFIG.whatsapp.replace(/\D/g, "")}` },
     { icon: Clock, label: "Working Hours", value: SITE_CONFIG.workingHours },
   ];
@@ -180,6 +182,21 @@ export default function ContactSection() {
                         <Hash className="w-4 h-4 text-[#1D6F42]" />
                         <span className="text-sm text-gray-500">Your Inquiry ID:</span>
                         <code className="font-mono font-bold text-[#1D6F42] text-base">{submittedId}</code>
+                      </div>
+                    )}
+                    {submittedId && submittedData && (
+                      <div className="flex flex-col items-center justify-center mb-6">
+                        <a
+                          href={`https://wa.me/${SITE_CONFIG.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(
+                            `Hello KL TRADERS, I have just submitted an inquiry (ID: ${submittedId}). Here are my details:\n- Name: ${submittedData.fullName}\n- Company: ${submittedData.companyName}\n- Product: ${submittedData.product}\n- Quantity: ${submittedData.quantity || "N/A"}\n- Inquiry Type: ${submittedData.inquiryType}\n- Message: ${submittedData.message || "N/A"}`
+                          )}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white px-5 py-3 rounded-xl font-semibold text-sm transition-colors shadow-md hover:scale-[1.02] duration-200"
+                        >
+                          <MessageCircle className="w-4 h-4" fill="white" />
+                          Send Details to WhatsApp
+                        </a>
                       </div>
                     )}
                     <p className="text-gray-500 text-sm max-w-xs mx-auto">

@@ -4,13 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard, FileText, FileCheck, Receipt,
-  ChevronRight, Leaf, ExternalLink,
+  ChevronRight, Leaf, ExternalLink, Users,
 } from "lucide-react";
 import LogoutButton from "@/components/admin/LogoutButton";
 
 const NAV = [
   { href: "/admin",           icon: LayoutDashboard, label: "Dashboard"  },
   { href: "/admin/inquiries", icon: FileText,        label: "Inquiries"  },
+  { href: "/admin/customers", icon: Users,           label: "Customers"  },
   { href: "/admin/quotes",    icon: FileCheck,       label: "Quotes"     },
   { href: "/admin/invoices",  icon: Receipt,         label: "Invoices"   },
 ];

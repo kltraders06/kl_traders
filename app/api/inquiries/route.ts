@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 import { generateInquiryId } from "@/lib/admin-utils";
+import { sendInquiryEmail } from "@/lib/email";
 import type { ContactFormData, ApiResponse, Inquiry } from "@/types";
 
 export async function POST(req: NextRequest) {
@@ -84,6 +85,21 @@ export async function POST(req: NextRequest) {
       .single();
 
     if (inquiryErr || !inquiry) throw inquiryErr;
+
+    // Send email notification to admin (non-blocking)
+    sendInquiryEmail({
+      inquiryId,
+      fullName: body.fullName,
+      companyName: body.companyName,
+      country: body.country,
+      email: body.email,
+      whatsapp: body.whatsapp,
+      preferredComm: body.preferredComm,
+      product: body.product,
+      quantity: body.quantity,
+      inquiryType: body.inquiryType,
+      message: body.message,
+    }).catch((err) => console.error("[POST /api/inquiries] Background email error:", err));
 
     return NextResponse.json<ApiResponse<{ inquiry_id: string }>>({
       success: true,

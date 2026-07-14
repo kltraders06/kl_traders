@@ -55,7 +55,10 @@ export async function proxy(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user && path.startsWith("/api/admin")) {
+  const isCustomAdmin = request.cookies.get("kltraders_admin_session")?.value === "true";
+  const hasAuth = !!user || isCustomAdmin;
+
+  if (!hasAuth && path.startsWith("/api/admin")) {
     return withAuthCookies(
       NextResponse.json(
         { success: false, error: "Authentication required." },
@@ -65,13 +68,13 @@ export async function proxy(request: NextRequest) {
     );
   }
 
-  if (!user && path !== "/admin/login") {
+  if (!hasAuth && path !== "/admin/login") {
     const redirectUrl = new URL("/admin/login", request.url);
     redirectUrl.searchParams.set("next", path);
     return withAuthCookies(NextResponse.redirect(redirectUrl), authResponse);
   }
 
-  if (user && path === "/admin/login") {
+  if (hasAuth && path === "/admin/login") {
     return withAuthCookies(NextResponse.redirect(new URL("/admin", request.url)), authResponse);
   }
 

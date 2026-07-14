@@ -3,7 +3,7 @@
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useCallback, useTransition } from "react";
 import { format } from "date-fns";
-import { Search, ChevronLeft, ChevronRight, ArrowUpRight, Inbox } from "lucide-react";
+import { Search, ChevronLeft, ChevronRight, ArrowUpRight, Inbox, Download } from "lucide-react";
 import StatusBadge from "./StatusBadge";
 import { INQUIRY_STATUSES, STATUS_CONFIG } from "@/lib/utils";
 import type { InquiryStatus, InquiryWithCustomer } from "@/types";
@@ -25,6 +25,51 @@ export default function InquiriesClient({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
+
+  const downloadCSV = () => {
+    if (inquiries.length === 0) return;
+    const headers = [
+      "Inquiry ID",
+      "Company Name",
+      "Contact Person",
+      "Email",
+      "WhatsApp",
+      "Preferred Comm",
+      "Country",
+      "Product",
+      "Quantity",
+      "Inquiry Type",
+      "Status",
+      "Date Created"
+    ];
+    const rows = inquiries.map(inq => [
+      inq.inquiry_id,
+      inq.company_name,
+      inq.full_name,
+      inq.email,
+      inq.whatsapp || "",
+      inq.preferred_comm,
+      inq.country,
+      inq.product,
+      inq.quantity || "",
+      inq.inquiry_type,
+      inq.status,
+      format(new Date(inq.created_at), "yyyy-MM-dd HH:mm:ss")
+    ]);
+    const csvContent = [
+      headers.join(","),
+      ...rows.map(row => row.map(val => `"${String(val).replace(/"/g, '""')}"`).join(","))
+    ].join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", `kltraders_inquiries_${format(new Date(), "yyyyMMdd_HHmmss")}.csv`);
+    link.style.visibility = "hidden";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   const updateParam = useCallback(
     (key: string, value: string) => {
@@ -52,34 +97,43 @@ export default function InquiriesClient({
           />
         </div>
 
-        {/* Status filter pills */}
-        <div className="flex gap-2 flex-wrap">
+        {/* Status filter pills & CSV Export */}
+        <div className="flex gap-2 flex-wrap items-center justify-between w-full xl:w-auto flex-1">
+          <div className="flex gap-2 flex-wrap">
+            <button
+              onClick={() => updateParam("status", "")}
+              className={`px-3 py-2 rounded-lg text-xs font-semibold transition-colors ${
+                currentStatus === "all"
+                  ? "bg-[#1D6F42] text-white"
+                  : "bg-white border border-gray-200 text-gray-600 hover:border-[#1D6F42]"
+              }`}
+            >
+              All ({total})
+            </button>
+            {INQUIRY_STATUSES.slice(0, 4).map((s) => {
+              const cfg = STATUS_CONFIG[s];
+              return (
+                <button
+                  key={s}
+                  onClick={() => updateParam("status", s)}
+                  className={`px-3 py-2 rounded-lg text-xs font-semibold transition-colors ${
+                    currentStatus === s
+                      ? `${cfg.bg} ${cfg.color} border border-current/20`
+                      : "bg-white border border-gray-200 text-gray-600 hover:border-gray-300"
+                  }`}
+                >
+                  {cfg.label}
+                </button>
+              );
+            })}
+          </div>
           <button
-            onClick={() => updateParam("status", "")}
-            className={`px-3 py-2 rounded-lg text-xs font-semibold transition-colors ${
-              currentStatus === "all"
-                ? "bg-[#1D6F42] text-white"
-                : "bg-white border border-gray-200 text-gray-600 hover:border-[#1D6F42]"
-            }`}
+            onClick={downloadCSV}
+            disabled={inquiries.length === 0}
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold bg-[#1D6F42]/10 text-[#1D6F42] hover:bg-[#1D6F42] hover:text-white transition-colors disabled:opacity-40"
           >
-            All ({total})
+            <Download size={13} /> Export CSV
           </button>
-          {INQUIRY_STATUSES.slice(0, 4).map((s) => {
-            const cfg = STATUS_CONFIG[s];
-            return (
-              <button
-                key={s}
-                onClick={() => updateParam("status", s)}
-                className={`px-3 py-2 rounded-lg text-xs font-semibold transition-colors ${
-                  currentStatus === s
-                    ? `${cfg.bg} ${cfg.color} border border-current/20`
-                    : "bg-white border border-gray-200 text-gray-600 hover:border-gray-300"
-                }`}
-              >
-                {cfg.label}
-              </button>
-            );
-          })}
         </div>
       </div>
       </div>

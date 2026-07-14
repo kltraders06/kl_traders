@@ -18,6 +18,22 @@ export default function LoginForm() {
     setError("");
     setLoading(true);
 
+    const inputLower = email.toLowerCase().trim();
+    if (inputLower === "kltraders") {
+      if (password === "arulmani06") {
+        document.cookie = "kltraders_admin_session=true; path=/; max-age=86400; SameSite=Lax";
+        setLoading(false);
+        const next = searchParams.get("next");
+        router.replace(next?.startsWith("/admin") ? next : "/admin");
+        router.refresh();
+        return;
+      } else {
+        setLoading(false);
+        setError("Invalid login credentials.");
+        return;
+      }
+    }
+
     const { error: loginError } = await getSupabaseClient().auth.signInWithPassword({
       email,
       password,
@@ -51,12 +67,11 @@ export default function LoginForm() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-[#2D3748] mb-1.5">
-              Email
+              Username or Email
             </label>
             <input
               id="email"
-              type="email"
-              autoComplete="email"
+              type="text"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               required
