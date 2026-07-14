@@ -27,7 +27,8 @@ export default function InquiryDetailClient({ inquiry, quotes, invoices }: Props
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
-  // Upload state
+  // Upload / Generator state
+  const [mode, setMode] = useState<"generate" | "upload">("generate");
   const [uploadType, setUploadType] = useState<"quote" | "invoice">("quote");
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState("");
@@ -35,6 +36,12 @@ export default function InquiryDetailClient({ inquiry, quotes, invoices }: Props
   const [uploadCurrency, setUploadCurrency] = useState("USD");
   const [uploadNotes, setUploadNotes] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
+
+  // Auto-generation form states
+  const [unitPrice, setUnitPrice] = useState("");
+  const [shipping, setShipping] = useState("0");
+  const [validUntil, setValidUntil] = useState("");
+  const [dueDate, setDueDate] = useState("");
 
   const handleSave = async () => {
     setSaving(true);
@@ -57,30 +64,56 @@ export default function InquiryDetailClient({ inquiry, quotes, invoices }: Props
   };
 
   const handleUpload = async () => {
-    const file = fileRef.current?.files?.[0];
-    if (!file) return setUploadError("Please select a PDF file.");
     setUploadError("");
     setUploading(true);
 
     try {
       const form = new FormData();
-      form.append("file", file);
       form.append("type", uploadType);
       form.append("inquiry_id", inquiry.id);
-      if (uploadAmount) form.append("amount", uploadAmount);
       form.append("currency", uploadCurrency);
       if (uploadNotes) form.append("notes", uploadNotes);
+
+      if (mode === "upload") {
+        const file = fileRef.current?.files?.[0];
+        if (!file) {
+          setUploadError("Please select a PDF file.");
+          setUploading(false);
+          return;
+        }
+        form.append("file", file);
+        if (uploadAmount) form.append("amount", uploadAmount);
+      } else {
+        if (!unitPrice) {
+          setUploadError("Please enter a unit price.");
+          setUploading(false);
+          return;
+        }
+        form.append("generate_auto", "true");
+        form.append("unit_price", unitPrice);
+        form.append("shipping", shipping);
+        if (uploadType === "quote") {
+          if (validUntil) form.append("valid_until", validUntil);
+        } else {
+          if (dueDate) form.append("due_date", dueDate);
+        }
+      }
 
       const res = await fetch("/api/admin/upload", { method: "POST", body: form });
       const json = await res.json();
       if (!json.success) throw new Error(json.error);
 
+      // Reset forms
       if (fileRef.current) fileRef.current.value = "";
       setUploadAmount("");
       setUploadNotes("");
+      setUnitPrice("");
+      setShipping("0");
+      setValidUntil("");
+      setDueDate("");
       startTransition(() => router.refresh());
     } catch (e: unknown) {
-      setUploadError(e instanceof Error ? e.message : "Upload failed.");
+      setUploadError(e instanceof Error ? e.message : "Action failed.");
     } finally {
       setUploading(false);
     }
@@ -143,18 +176,45 @@ export default function InquiryDetailClient({ inquiry, quotes, invoices }: Props
         </button>
       </div>
 
-      {/* ── Upload Quote / Invoice ── */}
+      {/* ── Document Generator / Manual Upload ── */}
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
         <h3 className="font-bold text-[#114A2C] text-sm mb-5 font-[Poppins] flex items-center gap-2">
           <FileUp className="w-4 h-4 text-[#1D6F42]" />
-          Upload Document
+          Issue Document
         </h3>
 
-        {/* Type toggle */}
+        {/* Mode Selector Tabs */}
+        <div className="flex border-b border-gray-100 mb-5">
+          <button
+            type="button"
+            onClick={() => setMode("generate")}
+            className={`flex-1 pb-3 text-sm font-semibold border-b-2 text-center transition-all ${
+              mode === "generate"
+                ? "border-[#1D6F42] text-[#1D6F42]"
+                : "border-transparent text-gray-400 hover:text-gray-600"
+            }`}
+          >
+            Auto-Generate PDF
+          </button>
+          <button
+            type="button"
+            onClick={() => setMode("upload")}
+            className={`flex-1 pb-3 text-sm font-semibold border-b-2 text-center transition-all ${
+              mode === "upload"
+                ? "border-[#1D6F42] text-[#1D6F42]"
+                : "border-transparent text-gray-400 hover:text-gray-600"
+            }`}
+          >
+            Upload Manual PDF
+          </button>
+        </div>
+
+        {/* Type Toggle (Quote / Invoice) */}
         <div className="flex gap-2 mb-4">
           {(["quote", "invoice"] as const).map((t) => (
             <button
               key={t}
+              type="button"
               onClick={() => setUploadType(t)}
               className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-colors ${
                 uploadType === t
@@ -168,60 +228,140 @@ export default function InquiryDetailClient({ inquiry, quotes, invoices }: Props
           ))}
         </div>
 
-        <div className="space-y-3">
-          {/* File input */}
+        <div className="space-y-4">
+          {mode === "generate" ? (
+            // AUTO GENERATE FORM
+            <>
+              {/* Unit Price + Currency */}
+              <div className="grid grid-cols-3 gap-3">
+                <div className="col-span-2">
+                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+                    Unit Price (per unit / kg) *
+                  </label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value={unitPrice}
+                    onChange={(e) => setUnitPrice(e.target.value)}
+                    placeholder="e.g. 2.50"
+                    className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D6F42]/30 focus:border-[#1D6F42]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+                    Currency
+                  </label>
+                  <select
+                    value={uploadCurrency}
+                    onChange={(e) => setUploadCurrency(e.target.value)}
+                    className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D6F42]/30"
+                  >
+                    {["USD", "EUR", "GBP", "AED", "SAR", "INR"].map((c) => (
+                      <option key={c}>{c}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              {/* Shipping Costs */}
+              <div>
+                <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+                  Shipping & Freight Cost
+                </label>
+                <input
+                  type="number"
+                  value={shipping}
+                  onChange={(e) => setShipping(e.target.value)}
+                  placeholder="0.00"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D6F42]/30 focus:border-[#1D6F42]"
+                />
+              </div>
+
+              {/* Date Limit */}
+              {uploadType === "quote" ? (
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+                    Quote Valid Until (date)
+                  </label>
+                  <input
+                    type="date"
+                    value={validUntil}
+                    onChange={(e) => setValidUntil(e.target.value)}
+                    className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D6F42]/30"
+                  />
+                </div>
+              ) : (
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+                    Invoice Due Date
+                  </label>
+                  <input
+                    type="date"
+                    value={dueDate}
+                    onChange={(e) => setDueDate(e.target.value)}
+                    className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D6F42]/30"
+                  />
+                </div>
+              )}
+            </>
+          ) : (
+            // MANUAL UPLOAD FORM
+            <>
+              {/* File Input */}
+              <div>
+                <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+                  PDF File *
+                </label>
+                <input
+                  ref={fileRef}
+                  type="file"
+                  accept="application/pdf"
+                  className="w-full text-sm text-gray-600 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-[#E8F5E9] file:text-[#1D6F42] hover:file:bg-[#1D6F42] hover:file:text-white file:transition-colors cursor-pointer"
+                />
+              </div>
+
+              {/* Amount + Currency */}
+              <div className="grid grid-cols-3 gap-3">
+                <div className="col-span-2">
+                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+                    Total Amount (optional)
+                  </label>
+                  <input
+                    type="number"
+                    value={uploadAmount}
+                    onChange={(e) => setUploadAmount(e.target.value)}
+                    placeholder="0.00"
+                    className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D6F42]/30 focus:border-[#1D6F42]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+                    Currency
+                  </label>
+                  <select
+                    value={uploadCurrency}
+                    onChange={(e) => setUploadCurrency(e.target.value)}
+                    className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D6F42]/30"
+                  >
+                    {["USD", "EUR", "GBP", "AED", "SAR", "INR"].map((c) => (
+                      <option key={c}>{c}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            </>
+          )}
+
+          {/* Notes (common) */}
           <div>
             <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
-              PDF File *
-            </label>
-            <input
-              ref={fileRef}
-              type="file"
-              accept="application/pdf"
-              className="w-full text-sm text-gray-600 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-[#E8F5E9] file:text-[#1D6F42] hover:file:bg-[#1D6F42] hover:file:text-white file:transition-colors cursor-pointer"
-            />
-          </div>
-
-          {/* Amount + currency */}
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
-                Amount (optional)
-              </label>
-              <input
-                type="number"
-                value={uploadAmount}
-                onChange={(e) => setUploadAmount(e.target.value)}
-                placeholder="0.00"
-                className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D6F42]/30 focus:border-[#1D6F42]"
-              />
-            </div>
-            <div>
-              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
-                Currency
-              </label>
-              <select
-                value={uploadCurrency}
-                onChange={(e) => setUploadCurrency(e.target.value)}
-                className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D6F42]/30"
-              >
-                {["USD", "EUR", "GBP", "AED", "SAR", "INR"].map((c) => (
-                  <option key={c}>{c}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          {/* Notes */}
-          <div>
-            <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
-              Notes (optional)
+              Notes / Payment Instructions (optional)
             </label>
             <input
               type="text"
               value={uploadNotes}
               onChange={(e) => setUploadNotes(e.target.value)}
-              placeholder="e.g. Valid for 30 days, includes shipping"
+              placeholder={mode === "generate" ? "e.g. Bank details, packaging instructions..." : "e.g. Valid for 30 days, includes shipping"}
               className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D6F42]/30 focus:border-[#1D6F42]"
             />
           </div>
@@ -233,14 +373,16 @@ export default function InquiryDetailClient({ inquiry, quotes, invoices }: Props
           <button
             onClick={handleUpload}
             disabled={uploading}
-            className="flex items-center gap-2 bg-[#114A2C] hover:bg-[#0A2E1A] disabled:opacity-70 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-colors"
+            className="w-full flex items-center justify-center gap-2 bg-[#1D6F42] hover:bg-[#114A2C] disabled:opacity-70 text-white px-5 py-3 rounded-xl text-sm font-semibold transition-all hover:scale-[1.01] active:scale-[0.99] duration-150 shadow-md shadow-green-950/10 cursor-pointer"
           >
             {uploading ? (
               <Loader2 className="w-4 h-4 animate-spin" />
             ) : (
               <FileUp className="w-4 h-4" />
             )}
-            {uploading ? "Uploading..." : `Upload ${uploadType.charAt(0).toUpperCase() + uploadType.slice(1)}`}
+            {uploading 
+              ? (mode === "generate" ? "Generating..." : "Uploading...") 
+              : (mode === "generate" ? `Generate & Send ${uploadType.charAt(0).toUpperCase() + uploadType.slice(1)}` : `Upload & Send ${uploadType.charAt(0).toUpperCase() + uploadType.slice(1)}`)}
           </button>
         </div>
       </div>
