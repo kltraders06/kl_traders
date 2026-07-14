@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 import { generateQuoteNumber, generateInvoiceNumber } from "@/lib/admin-utils";
+import { sendQuoteAutomationEmail, sendInvoiceAutomationEmail } from "@/lib/email";
 import type { ApiResponse } from "@/types";
 
 // POST /api/admin/upload
@@ -100,6 +101,41 @@ export async function POST(req: NextRequest) {
         .update({ status: "quoted" })
         .eq("id", inquiryId);
 
+      // Email automation: send quote to client (non-blocking)
+      (async () => {
+        try {
+          const { data: customer } = await supabaseAdmin
+            .from("inquiries_with_customers")
+            .select("*")
+            .eq("id", inquiryId)
+            .single();
+
+          if (customer?.email) {
+            const { data: signedUrlData } = await supabaseAdmin.storage
+              .from("quotes")
+              .createSignedUrl(filePath, 60 * 60 * 24 * 30);
+
+            if (signedUrlData?.signedUrl) {
+              await sendQuoteAutomationEmail({
+                customerEmail: customer.email,
+                customerName: customer.full_name,
+                companyName: customer.company_name,
+                quoteNumber: number,
+                amount,
+                currency,
+                validUntil: validUntil || null,
+                notes: notes || null,
+                signedUrl: signedUrlData.signedUrl,
+                product: customer.product,
+                inquiryIdText: customer.inquiry_id,
+              });
+            }
+          }
+        } catch (e) {
+          console.error("[Upload Route] Quote email automation failed:", e);
+        }
+      })();
+
       return NextResponse.json<ApiResponse<typeof data>>({ success: true, data });
     } else {
       const { data, error } = await supabaseAdmin
@@ -119,6 +155,41 @@ export async function POST(req: NextRequest) {
         .single();
 
       if (error) throw error;
+
+      // Email automation: send invoice to client (non-blocking)
+      (async () => {
+        try {
+          const { data: customer } = await supabaseAdmin
+            .from("inquiries_with_customers")
+            .select("*")
+            .eq("id", inquiryId)
+            .single();
+
+          if (customer?.email) {
+            const { data: signedUrlData } = await supabaseAdmin.storage
+              .from("invoices")
+              .createSignedUrl(filePath, 60 * 60 * 24 * 30);
+
+            if (signedUrlData?.signedUrl) {
+              await sendInvoiceAutomationEmail({
+                customerEmail: customer.email,
+                customerName: customer.full_name,
+                companyName: customer.company_name,
+                invoiceNumber: number,
+                amount,
+                currency,
+                dueDate: dueDate || null,
+                notes: notes || null,
+                signedUrl: signedUrlData.signedUrl,
+                product: customer.product,
+                inquiryIdText: customer.inquiry_id,
+              });
+            }
+          }
+        } catch (e) {
+          console.error("[Upload Route] Invoice email automation failed:", e);
+        }
+      })();
 
       return NextResponse.json<ApiResponse<typeof data>>({ success: true, data });
     }
